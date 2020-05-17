@@ -55,13 +55,22 @@ def reply_to_tweets():
 #and gave me a rate limit.
 
 search_words = "Rum"
-
-def search_for_tweets():
+#for this function to work RUMBot has to follow someone (which he hasn't)
+def search_for_tweets(username):
     print("Buscando tweets")
-        tweets = tw.Cursor(api.search,
-                  q=search_words.lower_case(),
-                  lang="en",
-                  since=date_since).items(5)
+    number_of_tweets = 20 #Can be changed later
+    tweets = api.user_timeline(screen_name=username)
+    twts = []
+
+    tweets_to_txt_file = [tweet.text for tweet in tweets]
+
+    for j in tweets_to_txt_file:
+        twts.append(j)
+
+    print(twts)
+
+
+
     #Still deciding on the implementation, have finals on the way
     #Probs will do some pseudocode l8r
 
