@@ -1,5 +1,13 @@
 import tweepy
-import time
+import time #not used yet
+
+#Search documentation for tweepy online for more information
+#Consumer key and Consumer secret are codes that twitter
+#gives out to devs for the creation and development of an app
+#these are directly related to the UPRMBot account.
+
+
+#Sorry for the spanglish
 
 
 CONSUMER_KEY = "228gljGTuSlf8JsfBTcsuFCdC"
@@ -40,6 +48,14 @@ def reply_to_tweets():
                     ' wooo', mention.id)
         if " " in mention.full_text.lower():
             api.update_status("@" + mention.user.screen_name + " bro im not programmed for that", mention.id)
+
+#planning on the function to search for tweets, twitter got all sensitive
+#and gave me a rate limit.
+
+def search_for_tweets():
+    print("Buscando tweets")
+
+
 
 while True:
     reply_to_tweets()
