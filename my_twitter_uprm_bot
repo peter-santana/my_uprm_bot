@@ -1,0 +1,45 @@
+import tweepy
+import time
+
+
+CONSUMER_KEY = "228gljGTuSlf8JsfBTcsuFCdC"
+CONSUMER_SECRET = "dxeNdY29ohyxEcAcbka04Od0LNnsHdYEiZUg1M2LhMVzrxKE1d"
+
+ACCESS_KEY = "1261881301751062534-rpCu562cTXoU3SPagrJhEulgQU523f"
+ACCESS_SECRET = "Lk5qsyYfxNgYQhvZs1boSN3PayV7XT9c0W2CPiwanPvLe"
+
+
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+api = tweepy.API(auth, wait_on_rate_limit=True)
+
+FILE_NAME = 'userids.txt'
+
+
+def get_last_seen(file_name):
+    f_read = open(file_name, 'r')
+    last_seen = int(f_read.read().strip())
+    f_read.close()
+    return last_seen_id
+
+def store_last_seen(last_seen_id, file_name):
+    f_write = open(file_name, 'w')
+    f_write.write(str(last_seen_id))
+    f_write.close()
+    return
+
+def reply_to_tweets():
+    print('Buscando mentions')
+    last_seen = get_last_seen("userids.txt")
+    mentions = api.mentions_timeline(last_seen_id,tweet_mode='extended')
+    for mention in reversed(mentions):
+        store_last_seen(last_seen_id, FILE_NAME)
+        if 'hey' in mention.full_text.lower():
+            print('contestando a este wlb')
+            api.update_status('@' + mention.user.screen_name +
+                    ' wooo', mention.id)
+        if " " in mention.full_text.lower():
+            api.update_status("@" + mention.user.screen_name + " bro im not programmed for that", mention.id)
+
+while True:
+    reply_to_tweets()
