@@ -6,6 +6,8 @@ import time #not used yet
 #gives out to devs for the creation and development of an app
 #these are directly related to the UPRMBot account.
 
+#Thank you CS Dojo for the basics
+
 
 #Sorry for the spanglish
 
@@ -52,8 +54,16 @@ def reply_to_tweets():
 #planning on the function to search for tweets, twitter got all sensitive
 #and gave me a rate limit.
 
+search_words = "Rum"
+
 def search_for_tweets():
     print("Buscando tweets")
+        tweets = tw.Cursor(api.search,
+                  q=search_words.lower_case(),
+                  lang="en",
+                  since=date_since).items(5)
+    #Still deciding on the implementation, have finals on the way
+    #Probs will do some pseudocode l8r
 
 
 
